@@ -1,7 +1,7 @@
 # Личный проект «Шесть городов» [![Build status][travis-image]][travis-url]
 
 * Студент: [Елена Загарская](https://up.htmlacademy.ru/react/2/user/871).
-* Наставник: `Неизвестно`.
+* Наставник: [Артем Брилев](https://htmlacademy.ru/profile/id1126425).
 
 ---
 
