@@ -1,16 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-Main.propTypes = {
-  title: PropTypes.string.isRequired,
-};
-
 const Main = (props) => {
   const {title} = props;
 
   return (
-    <div>
-      <div classNameName="page page--gray page--main">
+    <React.Fragment>
+      <div className="page page--gray page--main">
         <header className="header">
           <div className="container">
             <div className="header__wrapper">
@@ -262,8 +258,12 @@ const Main = (props) => {
           </div>
         </main>
       </div>
-    </div>
+    </React.Fragment>
   );
+};
+
+Main.propTypes = {
+  title: PropTypes.array.isRequired,
 };
 
 export default Main;
