@@ -4,9 +4,11 @@ import Main from '../main/main.jsx';
 
 const App = (props) => {
   const {apartmentTitle} = props;
+  const clickHandler = () => {};
 
   return <Main
     title={apartmentTitle}
+    handleClick={clickHandler}
   />;
 };
 
