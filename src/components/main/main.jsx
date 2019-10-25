@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Main = (props) => {
-  const {title} = props;
+  const {title, handleClick} = props;
 
   return (
     <React.Fragment>
@@ -116,7 +116,7 @@ const Main = (props) => {
                           <span className="visually-hidden">Rating</span>
                         </div>
                       </div>
-                      <h2 className="place-card__name">
+                      <h2 className="place-card__name" onClick = {handleClick}>
                         <a href="#">{title[0]}</a>
                       </h2>
                       <p className="place-card__type">Apartment</p>
@@ -178,7 +178,7 @@ const Main = (props) => {
                           <span className="visually-hidden">Rating</span>
                         </div>
                       </div>
-                      <h2 className="place-card__name">
+                      <h2 className="place-card__name" onClick = {handleClick}>
                         <a href="#">{title[1]}</a>
                       </h2>
                       <p className="place-card__type">Apartment</p>
@@ -212,7 +212,7 @@ const Main = (props) => {
                           <span className="visually-hidden">Rating</span>
                         </div>
                       </div>
-                      <h2 className="place-card__name">
+                      <h2 className="place-card__name" onClick = {handleClick}>
                         <a href="#">{title[2]}</a>
                       </h2>
                       <p className="place-card__type">Apartment</p>
@@ -243,7 +243,7 @@ const Main = (props) => {
                           <span className="visually-hidden">Rating</span>
                         </div>
                       </div>
-                      <h2 className="place-card__name">
+                      <h2 className="place-card__name" onClick = {handleClick}>
                         <a href="#">{title[3]}</a>
                       </h2>
                       <p className="place-card__type">Private room</p>
@@ -264,6 +264,7 @@ const Main = (props) => {
 
 Main.propTypes = {
   title: PropTypes.array.isRequired,
+  handleClick: PropTypes.func.isRequired,
 };
 
 export default Main;
