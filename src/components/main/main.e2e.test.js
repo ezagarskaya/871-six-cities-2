@@ -1,19 +1,20 @@
 import React from 'react';
-import Enzyme, {shallow} from 'enzyme';
+import Enzyme, {mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import Main from './main';
+import offers from '../../mocks/offers.js';
 
 Enzyme.configure({adapter: new Adapter()});
 
 it(`Main is correctly rendered after relaunch`, () => {
-  const clickHandler = jest.fn();
-  const app = shallow(<Main
-    title={[]}
-    handleClick={clickHandler}
+  const onHoverHandler = jest.fn();
+  const app = mount(<Main
+    apartments={offers}
+    onCardHover={onHoverHandler}
   />);
 
-  const title = app.find(`.place-card__name`).at(0);
-  title.simulate(`click`);
+  const card = app.find(`.place-card`).at(0);
+  card.simulate(`mouseover`);
 
-  expect(clickHandler).toHaveBeenCalledTimes(1);
+  expect(onHoverHandler).toHaveBeenCalledTimes(1);
 });
