@@ -1,12 +1,13 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import App from './app';
+import PlaceList from '../places-list/places-list.jsx';
 import offers from '../../mocks/offers.js';
 
-it(`App correctly renders after relaunch`, () => {
+it(`PlaceList correctly renders after relaunch`, () => {
   const tree = renderer
-  .create(<App
-    offers={offers}
+  .create(<PlaceList
+    apartments={offers}
+    onCardHover={() => {}}
   />)
   .toJSON();
 
