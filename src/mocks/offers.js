@@ -8,6 +8,7 @@ const offers = [
     inside: [`Wi-Fi`, `Washing machine`, `Towels`, `Heating`, `Coffee machine`, `Baby seat`, `Kitchen`, `Dishwasher`, `Cabel TV`, `Fridge`],
     description: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
     hostName: `Angelina`,
+    coords: [52.3909553943508, 4.85309666406198],
   },
   {
     name: `Wood and stone place`,
@@ -18,6 +19,7 @@ const offers = [
     inside: [`Wi-Fi`, `Washing machine`, `Towels`, `Heating`, `Coffee machine`, `Baby seat`, `Kitchen`, `Dishwasher`, `Cabel TV`, `Fridge`],
     description: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
     hostName: `Angelina`,
+    coords: [52.369553943508, 4.85309666406198],
   },
   {
     name: `Canal View Prinsengracht`,
@@ -28,6 +30,7 @@ const offers = [
     inside: [`Wi-Fi`, `Washing machine`, `Towels`, `Heating`, `Coffee machine`, `Baby seat`, `Kitchen`, `Dishwasher`, `Cabel TV`, `Fridge`],
     description: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
     hostName: `Angelina`,
+    coords: [52.3909553943508, 4.929309666406198],
   },
   {
     name: `Nice, cozy, warm big bed apartment`,
@@ -38,6 +41,7 @@ const offers = [
     inside: [`Wi-Fi`, `Washing machine`, `Towels`, `Heating`, `Coffee machine`, `Baby seat`, `Kitchen`, `Dishwasher`, `Cabel TV`, `Fridge`],
     description: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
     hostName: `Angelina`,
+    coords: [52.3809553943508, 4.939309666406198],
   },
 ];
 
