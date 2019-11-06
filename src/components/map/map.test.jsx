@@ -1,17 +1,16 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import Main from './main';
+import Map from '../map/map.jsx';
 import offers from '../../mocks/offers.js';
 
 jest.mock(`../map/map`);
 
-it(`Main correctly renders after relaunch`, () => {
-  const app = renderer
-  .create(<Main
+it(`Map correctly renders after relaunch`, () => {
+  const tree = renderer
+  .create(<Map
     apartments={offers}
-    onCardHover={() => {}}
   />)
   .toJSON();
 
-  expect(app).toMatchSnapshot();
+  expect(tree).toMatchSnapshot();
 });
