@@ -639,12 +639,7 @@ exports[`App correctly renders after relaunch 1`] = `
         </section>
         <div
           className="cities__right-section"
-        >
-          <div
-            className="cities__map map"
-            id="map"
-          />
-        </div>
+        />
       </div>
     </div>
   </main>

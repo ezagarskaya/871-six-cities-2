@@ -3,6 +3,11 @@ import PropTypes from 'prop-types';
 import leaflet from 'leaflet';
 
 class Map extends PureComponent {
+  constructor(props) {
+    super(props);
+
+    this._map = React.createRef();
+  }
 
   componentDidMount() {
     const {
@@ -17,7 +22,7 @@ class Map extends PureComponent {
       iconSize: [30, 30]
     });
 
-    const map = leaflet.map(`map`, {
+    const map = leaflet.map(this._map.current, {
       center: city,
       zoom,
       zoomControl: false,
@@ -42,8 +47,7 @@ class Map extends PureComponent {
 
   render() {
     return (
-      <div id="map"></div>
-      // <div id="map"></div>
+      <div className="cities__map map" ref={this._map}></div>
     );
   }
 }

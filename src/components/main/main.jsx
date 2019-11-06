@@ -99,9 +99,7 @@ const Main = (props) => {
                 />
               </section>
               <div className="cities__right-section">
-                <div id="map" className="cities__map map">
-                  <Map apartments={apartments} />
-                </div>
+                <Map apartments={apartments} />
               </div>
             </div>
           </div>
