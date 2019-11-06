@@ -3,14 +3,6 @@ import PropTypes from 'prop-types';
 import leaflet from 'leaflet';
 
 class Map extends PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      name: `React`
-    };
-    this._map = React.createRef();
-  }
 
   componentDidMount() {
     const {
@@ -40,9 +32,9 @@ class Map extends PureComponent {
     .addTo(map);
 
     return (
-      apartments.map((apartment, i) => {
+      apartments.map((apartment) => {
         leaflet
-        .marker(apartments[i].coords, {icon})
+        .marker(apartment.coords, {icon})
         .addTo(map);
       })
     );
@@ -50,7 +42,8 @@ class Map extends PureComponent {
 
   render() {
     return (
-      <div id="map" ref={this._map}></div>
+      <div id="map"></div>
+      // <div id="map"></div>
     );
   }
 }
