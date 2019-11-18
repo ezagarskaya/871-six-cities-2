@@ -1,6 +1,8 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import leaflet from 'leaflet';
+import { connect } from 'react-redux';
+
 
 class Map extends PureComponent {
   constructor(props) {
@@ -11,10 +13,12 @@ class Map extends PureComponent {
 
   componentDidMount() {
     const {
-      apartments,
+      offers,
+      current,
     } = this.props;
 
-    const city = [52.38333, 4.9];
+    const city = current.coords;
+    console.log(this.props.current)
     const zoom = 12;
 
     const icon = leaflet.icon({
@@ -36,13 +40,11 @@ class Map extends PureComponent {
     })
     .addTo(map);
 
-    return (
-      apartments.map((apartment) => {
-        leaflet
-        .marker(apartment.coords, {icon})
-        .addTo(map);
-      })
-    );
+    offers.map((offer) => {
+      leaflet
+      .marker(offer.coords, {icon})
+      .addTo(map);
+    })
   }
 
   render() {
@@ -54,7 +56,12 @@ class Map extends PureComponent {
 
 
 Map.propTypes = {
-  apartments: PropTypes.array.isRequired,
+
 };
 
-export default Map;
+const mapStateToProps = (state) => ({
+  current: state.currentCity,
+  offers: state.currentOffers,
+});
+
+export default connect(mapStateToProps)(Map);
