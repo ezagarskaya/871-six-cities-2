@@ -4,10 +4,9 @@ import configureStore from 'redux-mock-store';
 import {Provider} from "react-redux";
 import offers from '../../mocks/offers.js';
 import cities from '../../mocks/cities';
-import App from './app';
+import PlaceList from './places-list.jsx';
 
 const mockStore = configureStore([]);
-jest.mock(`../map/map`);
 
 describe(`My Connected React-Redux Component`, () => {
   let store;
@@ -23,7 +22,7 @@ describe(`My Connected React-Redux Component`, () => {
 
     component = renderer.create(
         <Provider store={store}>
-          <App />
+          <PlaceList />
         </Provider>
     );
 

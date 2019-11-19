@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`App correctly renders after relaunch 1`] = `
+exports[`My Connected React-Redux Component should render with given state from Redux store 1`] = `
 <div
   className="page page--gray page--main"
 >
@@ -77,43 +77,9 @@ exports[`App correctly renders after relaunch 1`] = `
             className="locations__item"
           >
             <a
-              className="locations__item-link tabs__item"
-              href="#"
-            >
-              <span>
-                Paris
-              </span>
-            </a>
-          </li>
-          <li
-            className="locations__item"
-          >
-            <a
-              className="locations__item-link tabs__item"
-              href="#"
-            >
-              <span>
-                Cologne
-              </span>
-            </a>
-          </li>
-          <li
-            className="locations__item"
-          >
-            <a
-              className="locations__item-link tabs__item"
-              href="#"
-            >
-              <span>
-                Brussels
-              </span>
-            </a>
-          </li>
-          <li
-            className="locations__item"
-          >
-            <a
               className="locations__item-link tabs__item tabs__item--active"
+              href="#"
+              onClick={[Function]}
             >
               <span>
                 Amsterdam
@@ -126,6 +92,46 @@ exports[`App correctly renders after relaunch 1`] = `
             <a
               className="locations__item-link tabs__item"
               href="#"
+              onClick={[Function]}
+            >
+              <span>
+                Paris
+              </span>
+            </a>
+          </li>
+          <li
+            className="locations__item"
+          >
+            <a
+              className="locations__item-link tabs__item"
+              href="#"
+              onClick={[Function]}
+            >
+              <span>
+                Cologne
+              </span>
+            </a>
+          </li>
+          <li
+            className="locations__item"
+          >
+            <a
+              className="locations__item-link tabs__item"
+              href="#"
+              onClick={[Function]}
+            >
+              <span>
+                Brussels
+              </span>
+            </a>
+          </li>
+          <li
+            className="locations__item"
+          >
+            <a
+              className="locations__item-link tabs__item"
+              href="#"
+              onClick={[Function]}
             >
               <span>
                 Hamburg
@@ -138,6 +144,7 @@ exports[`App correctly renders after relaunch 1`] = `
             <a
               className="locations__item-link tabs__item"
               href="#"
+              onClick={[Function]}
             >
               <span>
                 Dusseldorf
@@ -164,7 +171,9 @@ exports[`App correctly renders after relaunch 1`] = `
           <b
             className="places__found"
           >
-            312 places to stay in Amsterdam
+            132
+             places to stay in 
+            Amsterdam
           </b>
           <form
             action="#"
@@ -225,7 +234,6 @@ exports[`App correctly renders after relaunch 1`] = `
           >
             <article
               className="cities__place-card place-card"
-              onMouseOver={[Function]}
             >
               <div
                 className="place-card__mark"
@@ -328,7 +336,6 @@ exports[`App correctly renders after relaunch 1`] = `
             </article>
             <article
               className="cities__place-card place-card"
-              onMouseOver={[Function]}
             >
               <div
                 className="place-card__mark"
@@ -431,7 +438,6 @@ exports[`App correctly renders after relaunch 1`] = `
             </article>
             <article
               className="cities__place-card place-card"
-              onMouseOver={[Function]}
             >
               <div
                 className="place-card__mark"
@@ -534,7 +540,6 @@ exports[`App correctly renders after relaunch 1`] = `
             </article>
             <article
               className="cities__place-card place-card"
-              onMouseOver={[Function]}
             >
               <div
                 className="place-card__mark"

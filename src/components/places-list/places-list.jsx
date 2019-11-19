@@ -1,17 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import PlaceCard from '../place-card/place-card.jsx';
+import {connect} from 'react-redux';
 
-const PlaceList = ({apartments, onCardHover}) => {
-
+const PlaceList = (props) => {
   return (
     <div className="cities__places-list places__list tabs__content">
-      {apartments.map((apartment, i) => {
+      {props.current.map((offer, i) => {
         return (
           <PlaceCard
             key={`apartment-${i}`}
-            apartment={apartment}
-            onCardHover={onCardHover}
+            offer={offer}
           />
         );
       })}
@@ -19,9 +18,12 @@ const PlaceList = ({apartments, onCardHover}) => {
   );
 };
 
+const mapStateToProps = (state) => ({
+  current: state.currentOffers,
+});
+
 PlaceList.propTypes = {
-  apartments: PropTypes.array.isRequired,
-  onCardHover: PropTypes.func.isRequired,
+  current: PropTypes.array.isRequired,
 };
 
-export default PlaceList;
+export default connect(mapStateToProps)(PlaceList);

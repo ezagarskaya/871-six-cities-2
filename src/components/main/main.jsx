@@ -1,15 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import PlacesList from '../places-list/places-list.jsx';
 import Map from '../map/map.jsx';
 import CityList from '../city-list/city-list.jsx';
 import PlacesFound from '../places-found/places-found.jsx';
 
-const Main = (props) => {
-  const {
-    apartments,
-    onCardHover,
-  } = props;
+const Main = () => {
 
   return (
     <React.Fragment>
@@ -42,7 +37,7 @@ const Main = (props) => {
           <div className="tabs">
             <section className="locations container">
               <ul className="locations__list tabs__list">
-              <CityList />
+                <CityList />
               </ul>
             </section>
           </div>
@@ -66,10 +61,7 @@ const Main = (props) => {
                     <li className="places__option" tabIndex="0">Top rated first</li>
                   </ul>
                 </form>
-                <PlacesList
-                  apartments={apartments}
-                  onCardHover={onCardHover}
-                />
+                <PlacesList />
               </section>
               <div className="cities__right-section">
                 <Map />
@@ -80,11 +72,6 @@ const Main = (props) => {
       </div>
     </React.Fragment>
   );
-};
-
-Main.propTypes = {
-  apartments: PropTypes.array.isRequired,
-  onCardHover: PropTypes.func.isRequired,
 };
 
 export default Main;
