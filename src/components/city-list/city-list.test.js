@@ -4,9 +4,11 @@ import configureStore from 'redux-mock-store';
 import {Provider} from "react-redux";
 import offers from '../../mocks/offers.js';
 import cities from '../../mocks/cities';
-import App from './app';
+import CityList from './city-list';
+
 
 const mockStore = configureStore([]);
+
 jest.mock(`../map/map`);
 
 describe(`My Connected React-Redux Component`, () => {
@@ -23,13 +25,14 @@ describe(`My Connected React-Redux Component`, () => {
 
     component = renderer.create(
         <Provider store={store}>
-          <App />
+          <CityList />
         </Provider>
     );
-
   });
+
 
   it(`should render with given state from Redux store`, () => {
     expect(component.toJSON()).toMatchSnapshot();
   });
 });
+

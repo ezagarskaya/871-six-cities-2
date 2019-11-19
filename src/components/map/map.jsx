@@ -1,14 +1,14 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import leaflet from 'leaflet';
-import { connect } from 'react-redux';
-
+import {connect} from 'react-redux';
 
 class Map extends PureComponent {
   constructor(props) {
     super(props);
 
     this._map = React.createRef();
+    this.map = null;
   }
 
   componentDidMount() {
@@ -18,7 +18,6 @@ class Map extends PureComponent {
     } = this.props;
 
     const city = current.coords;
-    console.log(this.props.current)
     const zoom = 12;
 
     const icon = leaflet.icon({
@@ -26,25 +25,47 @@ class Map extends PureComponent {
       iconSize: [30, 30]
     });
 
-    const map = leaflet.map(this._map.current, {
+    this.map = leaflet.map(this._map.current, {
       center: city,
       zoom,
       zoomControl: false,
       marker: true,
     });
-    map.setView(city, zoom);
+    this.map.setView(city, zoom);
 
     leaflet
     .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
       attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
     })
-    .addTo(map);
+    .addTo(this.map);
 
     offers.map((offer) => {
       leaflet
       .marker(offer.coords, {icon})
-      .addTo(map);
-    })
+      .addTo(this.map);
+    });
+  }
+
+  componentDidUpdate() {
+    const {
+      offers,
+      current,
+    } = this.props;
+    const city = current.coords;
+    const zoom = 12;
+
+    const icon = leaflet.icon({
+      iconUrl: `img/pin.svg`,
+      iconSize: [30, 30]
+    });
+
+    this.map.setView(city, zoom);
+
+    offers.map((offer) => {
+      leaflet
+      .marker(offer.coords, {icon})
+      .addTo(this.map);
+    });
   }
 
   render() {
@@ -54,14 +75,14 @@ class Map extends PureComponent {
   }
 }
 
-
-Map.propTypes = {
-
-};
-
 const mapStateToProps = (state) => ({
   current: state.currentCity,
   offers: state.currentOffers,
 });
+
+Map.propTypes = {
+  offers: PropTypes.array.isRequired,
+  current: PropTypes.object.isRequired,
+};
 
 export default connect(mapStateToProps)(Map);

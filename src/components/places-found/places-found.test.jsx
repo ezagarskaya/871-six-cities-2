@@ -2,12 +2,11 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import configureStore from 'redux-mock-store';
 import {Provider} from "react-redux";
+import PlacesFound from './places-found';
 import offers from '../../mocks/offers.js';
 import cities from '../../mocks/cities';
-import App from './app';
 
 const mockStore = configureStore([]);
-jest.mock(`../map/map`);
 
 describe(`My Connected React-Redux Component`, () => {
   let store;
@@ -23,7 +22,7 @@ describe(`My Connected React-Redux Component`, () => {
 
     component = renderer.create(
         <Provider store={store}>
-          <App />
+          <PlacesFound />
         </Provider>
     );
 
@@ -33,3 +32,4 @@ describe(`My Connected React-Redux Component`, () => {
     expect(component.toJSON()).toMatchSnapshot();
   });
 });
+
