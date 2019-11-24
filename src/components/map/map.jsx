@@ -17,7 +17,11 @@ class Map extends PureComponent {
       current,
     } = this.props;
 
-    const city = current.coords;
+    if (!current) {
+      return
+    }
+
+    const city = [current.location.latitude, current.location.longitude];
     const zoom = 12;
 
     const icon = leaflet.icon({
@@ -41,7 +45,7 @@ class Map extends PureComponent {
 
     offers.map((offer) => {
       leaflet
-      .marker(offer.coords, {icon})
+      .marker([offer.location.latitude, offer.location.longitude], {icon})
       .addTo(this.map);
     });
   }
@@ -51,8 +55,29 @@ class Map extends PureComponent {
       offers,
       current,
     } = this.props;
-    const city = current.coords;
+
+    if (!current) {
+      return;
+    }
+
+    const city = [current.location.latitude, current.location.longitude];
     const zoom = 12;
+
+    if (!this.map) {
+      this.map = leaflet.map(this._map.current, {
+        center: city,
+        zoom,
+        zoomControl: false,
+        marker: true,
+      });
+
+      leaflet
+      .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
+      attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
+      })
+      .addTo(this.map);
+    }
+
 
     const icon = leaflet.icon({
       iconUrl: `img/pin.svg`,
@@ -63,7 +88,7 @@ class Map extends PureComponent {
 
     offers.map((offer) => {
       leaflet
-      .marker(offer.coords, {icon})
+      .marker([offer.location.latitude, offer.location.longitude], {icon})
       .addTo(this.map);
     });
   }
@@ -80,9 +105,9 @@ const mapStateToProps = (state) => ({
   offers: state.currentOffers,
 });
 
-Map.propTypes = {
-  offers: PropTypes.array.isRequired,
-  current: PropTypes.object.isRequired,
-};
+// Map.propTypes = {
+//   offers: PropTypes.array.isRequired,
+//   current: PropTypes.object.isRequired,
+// };
 
 export default connect(mapStateToProps)(Map);

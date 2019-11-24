@@ -1,31 +1,56 @@
-import offers from './mocks/offers.js';
-import cities from './mocks/cities.js';
 
 const initialState = {
-  currentCity: cities[0],
-  currentOffers: offers.filter((offer) => offer.city === cities[0].name),
-  offers,
-  cities,
+  currentOffers: null,
+  cities: [],
+  hotels: [],
+  currentCity: null,
 };
+
+const getHotels = () => {
+    return ((dispatch, getState, api) =>
+      api.get('/hotels').then((response) => dispatch(ActionCreator.addHotels(response.data))
+    )
+)};
+
+
+// const logIn = (login, pass) => {
+//   return ((dispatch, getState, api) =>
+//     api.post('/login', { email: login, password: pass}).then((response) => dispatch(ActionCreator.logIn(response.data),
+//     error => dispatch(ActionCreator.wrongPass(response.data))
+//   )
+// )};
+
+
 
 const ActionType = {
   CHANGE_CITY: `CHANGE_CITY`,
+  ADD_HOTELS: `ADD_HOTELS`,
 };
 
 const ActionCreator = {
-  changeCity: (name) => ({
+  changeCity: (city) => ({
     type: ActionType.CHANGE_CITY,
-    payload: name,
+    payload: city,
   }),
-
+  addHotels: (hotels) => ({
+    type: ActionType.ADD_HOTELS,
+    payload: hotels,
+  }),
+  getHotels,
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.CHANGE_CITY: return Object.assign({}, state, {
-      currentCity: state.cities.find((city) => city.name === action.payload),
-      currentOffers: state.offers.filter((offer) => offer.city === action.payload),
+      currentCity: state.hotels.find((city) => city.city.name === action.payload),
+      currentOffers: state.hotels.filter((offer) => offer.city.name === action.payload),
     });
+    case ActionType.ADD_HOTELS: return Object.assign({}, state, {
+      hotels: action.payload,
+      currentCity: action.payload.length ? action.payload[0].city : null,
+      currentOffers: action.payload.length ? action.payload.filter((offer) => offer.city.name === action.payload[0].city.name) : null,
+      cities: [...new Set(action.payload.map((city) => city.city.name))],
+    })
   }
 
   return state;
