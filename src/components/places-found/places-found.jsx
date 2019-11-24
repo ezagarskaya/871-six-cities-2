@@ -5,16 +5,19 @@ import {connect} from 'react-redux';
 const PlacesFound = (props) => {
 
   return (
-    <b className="places__found">{props.current.count} places to stay in {props.current.name}</b>
+    props.current ?
+    <b className="places__found">{props.offers.length} places to stay in {props.offers[0].city.name}</b>:
+    null
   );
 };
 
 const mapStateToProps = (state) => ({
   current: state.currentCity,
+  offers: state.currentOffers,
 });
 
-PlacesFound.propTypes = {
-  current: PropTypes.object.isRequired,
-};
+// PlacesFound.propTypes = {
+//   current: PropTypes.object.isRequired,
+// };
 
 export default connect(mapStateToProps)(PlacesFound);

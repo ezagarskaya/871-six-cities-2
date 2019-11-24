@@ -5,19 +5,20 @@ import {ActionCreator} from '../../reducer.js';
 
 const CityList = (props) => {
   const className = `locations__item-link tabs__item`;
-
   return (
+    props.current ?
     <>
       {props.cities.map((city) => (
-        <li key={city.name} className="locations__item">
-          <a onClick={() => props.dispatch(ActionCreator.changeCity(city.name))}
-            className={props.current.name === city.name ? className + ` tabs__item--active` : className} href="#">
-            <span>{city.name}</span>
+        <li key={city} className="locations__item">
+          <a onClick={() => props.dispatch(ActionCreator.changeCity(city))}
+            className={props.current && props.current.name === city ? className + ` tabs__item--active` : className} href="#">
+            <span>{city}</span>
           </a>
         </li>
       )
       )}
-    </>
+    </> :
+    null
   );
 };
 
@@ -26,10 +27,10 @@ const mapStateToProps = (state) => ({
   current: state.currentCity,
 });
 
-CityList.propTypes = {
-  cities: PropTypes.array.isRequired,
-  current: PropTypes.object.isRequired,
-  dispatch: PropTypes.func.isRequired,
-};
+// CityList.propTypes = {
+//   cities: PropTypes.array.isRequired,
+//   current: PropTypes.object.isRequired,
+//   dispatch: PropTypes.func.isRequired,
+// };
 
 export default connect(mapStateToProps)(CityList);
