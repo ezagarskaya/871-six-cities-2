@@ -4,6 +4,7 @@ const initialState = {
   cities: [],
   hotels: [],
   currentCity: null,
+  isAuthorizationRequired: false,
 };
 
 const getHotels = () => {
@@ -13,18 +14,27 @@ const getHotels = () => {
 )};
 
 
-// const logIn = (login, pass) => {
-//   return ((dispatch, getState, api) =>
-//     api.post('/login', { email: login, password: pass}).then((response) => dispatch(ActionCreator.logIn(response.data),
-//     error => dispatch(ActionCreator.wrongPass(response.data))
-//   )
-// )};
+const logIn = (login, pass) => {
+  return ((dispatch, getState, api) =>
+    api.post('/login', { email: login, password: pass}).then((response) => dispatch(ActionCreator.logIn(response.data))
+       // error => dispatch(ActionCreator.wrongPass(response.data))
+  )
+)};
 
+const getAuthorization = () => {
+  return ((dispatch, getState, api) =>
+    api.get('/login').then((response) => dispatch(ActionCreator.getToken(response.data))
 
+       // error => dispatch(ActionCreator.wrongPass(response.data))
+  )
+
+)};
+console.log(getAuthorization())
 
 const ActionType = {
   CHANGE_CITY: `CHANGE_CITY`,
   ADD_HOTELS: `ADD_HOTELS`,
+  LOG_IN: `LOG_IN`,
 };
 
 const ActionCreator = {
@@ -36,8 +46,20 @@ const ActionCreator = {
     type: ActionType.ADD_HOTELS,
     payload: hotels,
   }),
+  signIn: () => ({
+    type: ActionType.LOG_IN,
+    payload: true,
+  }),
+  getToken: () => ({
+    type: ActionType.LOG_IN,
+    payload: true,
+  }),
   getHotels,
+  logIn,
+  getAuthorization,
 };
+
+
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -50,7 +72,10 @@ const reducer = (state = initialState, action) => {
       currentCity: action.payload.length ? action.payload[0].city : null,
       currentOffers: action.payload.length ? action.payload.filter((offer) => offer.city.name === action.payload[0].city.name) : null,
       cities: [...new Set(action.payload.map((city) => city.city.name))],
-    })
+    });
+    case ActionType.LOG_IN: return Object.assign({}, state, {
+      isAuthorizationRequired: action.payload,
+    });
   }
 
   return state;
