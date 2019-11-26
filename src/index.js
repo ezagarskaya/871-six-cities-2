@@ -3,6 +3,7 @@ import {Provider} from "react-redux";
 import React from "react";
 import thunk from 'redux-thunk';
 import ReactDOM from "react-dom";
+import {BrowserRouter} from 'react-router-dom';
 
 import App from "./components/app/app.jsx";
 import offers from "./mocks/offers.js";
@@ -22,7 +23,9 @@ const init = (apartments) => {
   /* eslint-enable */
 
   ReactDOM.render(<Provider store={store}>
-    <App offers={apartments}/>
+    <BrowserRouter>
+      <App offers={apartments}/>
+    </BrowserRouter>
   </Provider>,
   document.querySelector(`#root`)
   );
