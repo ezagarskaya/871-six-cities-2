@@ -1,9 +1,16 @@
 import React from 'react';
 import {PureComponent} from 'react';
 import {connect} from 'react-redux';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 import Main from '../main/main.jsx';
 import SignIn from '../sign-in/sign-in.jsx';
+import OfferDetails from '../offer-details/offer-details.jsx';
 import {ActionCreator} from '../../reducer.js';
 
 class App extends PureComponent {
@@ -14,10 +21,12 @@ componentDidMount() {
 
   render() {
     return (
-      !this.props.authorization ?
-      <Main
-      /> :
-      <SignIn />
+      <Router>
+        <Switch>
+          <Route path="/" exact component={Main} />
+          <Route path="/offer/:id" exact component={OfferDetails} />
+        </Switch>
+      </Router>
     );
   }
 }

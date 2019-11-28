@@ -27,9 +27,7 @@ const getAuthorization = () => {
 
        // error => dispatch(ActionCreator.wrongPass(response.data))
   )
-
 )};
-console.log(getAuthorization())
 
 const ActionType = {
   CHANGE_CITY: `CHANGE_CITY`,
