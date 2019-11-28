@@ -59,8 +59,8 @@ const OfferDetails = (props) => {
           </div>
           <div className="property__rating rating">
             <div className="property__stars rating__stars">
-              <span ></span>
-              <span className="visually-hidden">Rating {propsArr.rating}</span>
+              <span style={{width: `${propsArr.rating * 20}%`}}></span>
+              <span className="visually-hidden"></span>
             </div>
             <span className="property__rating-value rating__value"></span>
           </div>
@@ -93,7 +93,7 @@ const OfferDetails = (props) => {
             <h2 className="property__host-title">Meet the host</h2>
             <div className="property__host-user user">
               <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
-                <img className="property__avatar user__avatar" src={'../../../public/' + propsArr.host.avatar_url} width="74" height="74" alt="Host avatar" />
+                <img className="property__avatar user__avatar" src={`../${propsArr.host.avatar_url}`} width="74" height="74" alt="Host avatar" />
               </div>
               <span className="property__user-name">
                 {propsArr.host.name}
@@ -112,6 +112,8 @@ const OfferDetails = (props) => {
       </div>
       <section className="property__map map">
         <Map
+        city={propsArr.city}
+        offers={propsArr.location}
         />
       </section>
     </section>
