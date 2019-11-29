@@ -8,26 +8,28 @@ const initialState = {
 };
 
 const getHotels = () => {
-    return ((dispatch, getState, api) =>
-      api.get('/hotels').then((response) => dispatch(ActionCreator.addHotels(response.data))
-    )
-)};
+  return ((dispatch, getState, api) =>
+    api.get(`/hotels`).then((response) => dispatch(ActionCreator.addHotels(response.data)))
+  );
+};
 
 
 const logIn = (login, pass) => {
   return ((dispatch, getState, api) =>
-    api.post('/login', { email: login, password: pass}).then((response) => dispatch(ActionCreator.logIn(response.data))
-       // error => dispatch(ActionCreator.wrongPass(response.data))
-  )
-)};
+    api.post(`/login`, {email: login, password: pass}).then((response) => dispatch(ActionCreator.logIn(response.data))
+    // error => dispatch(ActionCreator.wrongPass(response.data))
+    )
+  );
+};
 
 const getAuthorization = () => {
   return ((dispatch, getState, api) =>
-    api.get('/login').then((response) => dispatch(ActionCreator.getToken(response.data))
+    api.get(`/login`).then((response) => dispatch(ActionCreator.getToken(response.data))
 
-       // error => dispatch(ActionCreator.wrongPass(response.data))
-  )
-)};
+        // error => dispatch(ActionCreator.wrongPass(response.data))
+    )
+  );
+};
 
 const ActionType = {
   CHANGE_CITY: `CHANGE_CITY`,
@@ -57,8 +59,6 @@ const ActionCreator = {
   getAuthorization,
 };
 
-
-
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.CHANGE_CITY: return Object.assign({}, state, {
@@ -84,4 +84,3 @@ export {
   ActionType,
   reducer,
 };
-
