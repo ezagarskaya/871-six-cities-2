@@ -16,8 +16,8 @@ const init = (apartments) => {
   const store = createStore(
       reducer,
       compose(
-        applyMiddleware(thunk.withExtraArgument(api)),
-        window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f,
+          applyMiddleware(thunk.withExtraArgument(api)),
+          window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f
       )
   );
   /* eslint-enable */

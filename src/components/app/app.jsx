@@ -5,7 +5,6 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
 } from "react-router-dom";
 
 import Main from '../main/main.jsx';
@@ -15,9 +14,9 @@ import {ActionCreator} from '../../reducer.js';
 
 class App extends PureComponent {
 
-componentDidMount() {
-  this.props.dispatch(ActionCreator.getHotels())
-}
+  componentDidMount() {
+    this.props.dispatch(ActionCreator.getHotels());
+  }
 
   render() {
     return (
@@ -25,6 +24,7 @@ componentDidMount() {
         <Switch>
           <Route path="/" exact component={Main} />
           <Route path="/offer/:id" exact component={OfferDetails} />
+          <Route path="/sign-in" exact component={SignIn} />
         </Switch>
       </Router>
     );

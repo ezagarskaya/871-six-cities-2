@@ -1,8 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
-const SignIn = (props) => {
+const SignIn = () => {
 
   return (
     <main className="page__main page__main--login">
@@ -17,7 +16,7 @@ const SignIn = (props) => {
                 type="email"
                 name="email"
                 placeholder="Email"
-                />
+              />
             </div>
             <div className="login__input-wrapper form__input-wrapper">
               <label className="visually-hidden">Password</label>
@@ -26,7 +25,7 @@ const SignIn = (props) => {
                 type="password"
                 name="password"
                 placeholder="Password"
-                />
+              />
             </div>
             <button className="login__submit form__submit button" type="submit">Sign in</button>
           </form>

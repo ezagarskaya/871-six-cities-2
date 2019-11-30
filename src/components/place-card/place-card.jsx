@@ -1,6 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 
 const PlaceCard = (props) => {
   return (
@@ -33,7 +32,7 @@ const PlaceCard = (props) => {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={{pathname: `/offer/`+ props.offer.id, props: props.offer}}>{props.offer.title}</Link>
+          <Link to={{pathname: `/offer/` + props.offer.id, props: props.offer}}>{props.offer.title}</Link>
         </h2>
         <p className="place-card__type">Apartment</p>
       </div>
