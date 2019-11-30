@@ -1,11 +1,14 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import {Link} from "react-router-dom";
+
 import Map from '../map/map.jsx';
+import ReviewsList from '../reviews-list/reviews-list.jsx';
 
 
 const OfferDetails = (props) => {
   const propsArr = props.location.props;
-
+  // console.log(props);
   return (
     <div className="page">
       <header className="header">
@@ -39,7 +42,7 @@ const OfferDetails = (props) => {
             <div className="property__gallery">
               {
                 propsArr.images.map((photo, i) => <div key={`id-photo${i}`} className="property__image-wrapper">
-                  <img className="property__image" src={photo}/>
+                  <img className="property__image" src={photo} alt={propsArr.title}/>
                 </div>)
               }
             </div>
@@ -62,7 +65,7 @@ const OfferDetails = (props) => {
                   <span style={{width: `${propsArr.rating * 20}%`}}></span>
                   <span className="visually-hidden"></span>
                 </div>
-                <span className="property__rating-value rating__value"></span>
+                <span className="property__rating-value rating__value">{propsArr.rating}</span>
               </div>
               <ul className="property__features">
                 <li className="property__feature property__feature--entire">
@@ -107,13 +110,12 @@ const OfferDetails = (props) => {
                   </p>
                 </div>
               </div>
-              {/* <ReviewList reviews={reviews} /> */}
+              <ReviewsList reviews={propsArr.reviews} id={propsArr.id}/>
             </div>
           </div>
           <section className="property__map map">
             <Map
               city={propsArr.city}
-              offers={propsArr.location}
             />
           </section>
         </section>
@@ -127,9 +129,8 @@ const OfferDetails = (props) => {
   );
 };
 
-// const mapStateToProps = (state) => ({
-//   offer: state.currentOffer,
-// });
+const mapStateToProps = (state) => ({
+  reviews: state.reviews,
+});
 
-
-export default OfferDetails;
+export default connect(mapStateToProps)(OfferDetails);
