@@ -24,7 +24,7 @@ class Map extends PureComponent {
     const zoom = 12;
 
     const icon = leaflet.icon({
-      iconUrl: `img/pin.svg`,
+      iconUrl: `/img/pin.svg`,
       iconSize: [30, 30]
     });
 
@@ -79,7 +79,7 @@ class Map extends PureComponent {
 
 
     const icon = leaflet.icon({
-      iconUrl: `img/pin.svg`,
+      iconUrl: `/img/pin.svg`,
       iconSize: [30, 30]
     });
 
@@ -94,7 +94,7 @@ class Map extends PureComponent {
 
   render() {
     return (
-      <div className="cities__map map" ref={this._map}></div>
+      <div style={{height: `100%`}} className="cities__map map" ref={this._map}></div>
     );
   }
 }

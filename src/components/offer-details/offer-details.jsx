@@ -1,15 +1,21 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 import {Link} from "react-router-dom";
 
 import Map from '../map/map.jsx';
 import ReviewsList from '../reviews-list/reviews-list.jsx';
+import {ActionCreator} from '../../reducer.js';
 
 const OfferDetails = (props) => {
-
     const {match: {params: {id}}, offers} = props;
 
     const offer = offers.find((item) => item.id === +id)
+    useEffect(() => {props.dispatch(ActionCreator.filterOffers(id))}, []);
+
+    if (!offer) {
+      return <div>loading</div>;
+    }
+
     const {title,
       description,
       price,
@@ -20,10 +26,6 @@ const OfferDetails = (props) => {
       type,
       bedrooms,
     } = offer;
-
-    if (!offer) {
-      return null;
-    }
 
     return (
       <div className="page">
@@ -71,7 +73,7 @@ const OfferDetails = (props) => {
                   </h1>
                   <button className="property__bookmark-button button" type="button">
                     <svg className="property__bookmark-icon" width="31" height="33">
-                      <use xaHref="#icon-bookmark"></use>
+                      <use href="#icon-bookmark"></use>
                     </svg>
                     <span className="visually-hidden">To bookmarks</span>
                   </button>
