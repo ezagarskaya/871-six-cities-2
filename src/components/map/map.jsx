@@ -24,7 +24,7 @@ class Map extends PureComponent {
     const zoom = 12;
 
     const icon = leaflet.icon({
-      iconUrl: `img/pin.svg`,
+      iconUrl: `/img/pin.svg`,
       iconSize: [30, 30]
     });
 
@@ -69,17 +69,18 @@ class Map extends PureComponent {
         zoomControl: false,
         marker: true,
       });
+    } else {
+      this.map.eachLayer((marker) => this.map.removeLayer(marker));
+    }
 
-      leaflet
+    leaflet
       .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
         attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
       })
       .addTo(this.map);
-    }
-
 
     const icon = leaflet.icon({
-      iconUrl: `img/pin.svg`,
+      iconUrl: `/img/pin.svg`,
       iconSize: [30, 30]
     });
 
@@ -94,7 +95,7 @@ class Map extends PureComponent {
 
   render() {
     return (
-      <div className="cities__map map" ref={this._map}></div>
+      <div style={{height: `100%`}} className="cities__map map" ref={this._map}></div>
     );
   }
 }

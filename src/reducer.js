@@ -1,6 +1,6 @@
 
 const initialState = {
-  currentOffers: null,
+  currentOffers: [],
   cities: [],
   hotels: [],
   currentCity: null,
@@ -31,10 +31,12 @@ const getAuthorization = () => {
   );
 };
 
+
 const ActionType = {
   CHANGE_CITY: `CHANGE_CITY`,
   ADD_HOTELS: `ADD_HOTELS`,
   LOG_IN: `LOG_IN`,
+  FILTER_OFFERS: `FILTER_OFFERS`,
 };
 
 const ActionCreator = {
@@ -57,6 +59,10 @@ const ActionCreator = {
   getHotels,
   logIn,
   getAuthorization,
+  filterOffers: (id) => ({
+    type: ActionType.FILTER_OFFERS,
+    payload: id,
+  })
 };
 
 const reducer = (state = initialState, action) => {
@@ -74,6 +80,9 @@ const reducer = (state = initialState, action) => {
     case ActionType.LOG_IN: return Object.assign({}, state, {
       isAuthorizationRequired: action.payload,
     });
+    case ActionType.FILTER_OFFERS: return Object.assign({}, state, {
+      currentOffers: state.hotels.filter((offer) => offer.id === +action.payload),
+    });
   }
 
   return state;
@@ -84,3 +93,4 @@ export {
   ActionType,
   reducer,
 };
+
