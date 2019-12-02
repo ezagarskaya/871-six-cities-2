@@ -5,7 +5,6 @@ const initialState = {
   hotels: [],
   currentCity: null,
   isAuthorizationRequired: false,
-  reviews: [],
 };
 
 const getHotels = () => {
@@ -14,11 +13,6 @@ const getHotels = () => {
   );
 };
 
-const getReviews = (id) => {
-  return ((dispatch, getState, api) =>
-    api.get(`/comments/${id}`).then((response) => dispatch(ActionCreator.addReviews(response.data)))
-  );
-};
 
 const logIn = (login, pass) => {
   return ((dispatch, getState, api) =>
@@ -42,7 +36,6 @@ const ActionType = {
   CHANGE_CITY: `CHANGE_CITY`,
   ADD_HOTELS: `ADD_HOTELS`,
   LOG_IN: `LOG_IN`,
-  LOAD_REVIEWS: `LOAD_REVIEWS`,
 };
 
 const ActionCreator = {
@@ -63,13 +56,8 @@ const ActionCreator = {
     payload: true,
   }),
   getHotels,
-  getReviews,
   logIn,
   getAuthorization,
-  addReviews: (reviews) => ({
-    type: ActionType.LOAD_REVIEWS,
-    payload: reviews,
-  }),
 };
 
 const reducer = (state = initialState, action) => {
@@ -87,9 +75,6 @@ const reducer = (state = initialState, action) => {
     case ActionType.LOG_IN: return Object.assign({}, state, {
       isAuthorizationRequired: action.payload,
     });
-    case ActionType.LOAD_REVIEWS: return Object.assign({}, state, {
-      reviews: action.payload,
-    });
   }
 
   return state;
@@ -100,3 +85,5 @@ export {
   ActionType,
   reducer,
 };
+
+// state.hotels.find((offer) => offer.id === +action.payload),

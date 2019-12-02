@@ -1,20 +1,44 @@
-import React from 'react';
-import Review from '../review/review.jsx';
+import React, {PureComponent} from 'react';
+import {connect} from 'react-redux';
 
-const ReviewsList = (props) => {
-  // console.log(props)
+import Review from '../review/review.jsx';
+import api from '../../api.js';
+
+class ReviewsList extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      reviews: [],
+    }
+  }
+
+  componentDidMount() {
+
+    console.log(this.props.id)
+    console.log(this.state)
+    api.get(`/comments/${this.props.id}`).then((response) => {console.log(response.data);
+      this.setState({reviews: response.data})})
+  }
+
+  render () {
+    console.log(this.state)
   return (
     <section className="property__reviews reviews">
       <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">
-        {props.reviews.length}
+        {this.state.reviews.length}
       </span></h2>
       <ul className="reviews__list">
         {
-          props.reviews.map((review) => <Review key={review.id} review={review} />)
+          this.state.reviews.map((review) => <Review key={review.id} review={review} />)
         }
       </ul>
     </section>
   );
+  }
 };
 
-export default ReviewsList;
+const mapStateToProps = (state) => ({
+  offers: state.currentOffers,
+});
+
+export default connect(mapStateToProps)(ReviewsList);
