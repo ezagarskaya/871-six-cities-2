@@ -94,4 +94,3 @@ export {
   reducer,
 };
 
-// state.hotels.find((offer) => offer.id === +action.payload),
