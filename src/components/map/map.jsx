@@ -16,7 +16,7 @@ class Map extends PureComponent {
       current,
     } = this.props;
 
-    if (!current) {
+    if (!current || !offers) {
       return;
     }
 
@@ -55,7 +55,7 @@ class Map extends PureComponent {
       current,
     } = this.props;
 
-    if (!current) {
+    if (!current || !offers) {
       return;
     }
 

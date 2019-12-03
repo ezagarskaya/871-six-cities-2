@@ -1,14 +1,16 @@
 import React from 'react';
+import {connect} from 'react-redux';
+
 import PlacesList from '../places-list/places-list.jsx';
 import Map from '../map/map.jsx';
 import CityList from '../city-list/city-list.jsx';
 import PlacesFound from '../places-found/places-found.jsx';
+import MainEmpty from '../main-empty/main-empty.jsx';
 
-const Main = () => {
-
+const Main = (props) => {
   return (
     <React.Fragment>
-      <div className="page page--gray page--main">
+        <div className="page page--gray page--main">
         <header className="header">
           <div className="container">
             <div className="header__wrapper">
@@ -31,7 +33,8 @@ const Main = () => {
             </div>
           </div>
         </header>
-
+        {
+          props.offers ?
         <main className="page__main page__main--index">
           <h1 className="visually-hidden">Cities</h1>
           <div className="tabs">
@@ -41,6 +44,7 @@ const Main = () => {
               </ul>
             </section>
           </div>
+
           <div className="cities">
             <div className="cities__places-container container">
               <section className="cities__places places">
@@ -69,9 +73,16 @@ const Main = () => {
             </div>
           </div>
         </main>
+        :
+        <MainEmpty />
+        }
       </div>
     </React.Fragment>
   );
 };
 
-export default Main;
+const mapStateToProps = (state) => ({
+  offers: state.currentOffers,
+});
+
+export default connect(mapStateToProps)(Main);

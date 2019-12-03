@@ -9,7 +9,8 @@ const initialState = {
 
 const getHotels = () => {
   return ((dispatch, getState, api) =>
-    api.get(`/hotels`).then((response) => dispatch(ActionCreator.addHotels(response.data)))
+    api.get(`/hotels`).then((response) => {dispatch(ActionCreator.addHotels(response.data));
+    console.log(response.data)})
   );
 };
 
