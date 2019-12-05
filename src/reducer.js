@@ -80,9 +80,16 @@ const reducer = (state = initialState, action) => {
     case ActionType.LOG_IN: return Object.assign({}, state, {
       isAuthorizationRequired: action.payload,
     });
-    case ActionType.FILTER_OFFERS: return Object.assign({}, state, {
-      currentOffers: state.hotels.filter((offer) => offer.id === +action.payload),
-    });
+    case ActionType.FILTER_OFFERS: {
+      const offer = state.hotels.find((hotel) => hotel.id === +action.payload);
+      if (!offer) {
+        return state;
+      }
+      const nearOffers = state.hotels.filter((hotel) => hotel.city.name === offer.city.name && hotel.id !== offer.id).slice(0, 3);
+      return Object.assign({}, state, {
+        currentOffers: [offer, ...nearOffers],
+      });
+    }
   }
 
   return state;
