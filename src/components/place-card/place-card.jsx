@@ -1,17 +1,18 @@
 import React from 'react';
 import {Link} from "react-router-dom";
-// import {ActionCreator} from '../../reducer.js';
-
 
 const PlaceCard = (props) => {
   const {offer, id} = props;
-  const {title, price, rating} = offer;
+  const {title, price, rating, type} = offer;
 
   return (
     <article key={id} className="cities__place-card place-card" >
-      <div className="place-card__mark">
-        <span>Premium</span>
-      </div>
+      { props.offer.is_premium ?
+        <div className="place-card__mark">
+          <span>Premium</span>
+        </div> :
+        <div></div>
+      }
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
           <img className="place-card__image" src={`${offer.preview_image}`} width="260" height="200" alt="Place image" />
@@ -32,7 +33,7 @@ const PlaceCard = (props) => {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: `${rating * 20}%`}}></span>
+            <span style={{width: `${Math.round(rating) * 20}%`}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
@@ -40,7 +41,7 @@ const PlaceCard = (props) => {
           <Link to={{pathname: `/offer/` + offer.id}}
           >{title}</Link>
         </h2>
-        <p className="place-card__type">Apartment</p>
+        <p className="place-card__type">{type}</p>
       </div>
     </article>
   );

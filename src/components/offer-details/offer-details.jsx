@@ -4,11 +4,11 @@ import {Link} from "react-router-dom";
 
 import Map from '../map/map.jsx';
 import ReviewsList from '../reviews-list/reviews-list.jsx';
+import PlacesNear from '../places-near/places-near.jsx';
 import {ActionCreator} from '../../reducer.js';
 
 const OfferDetails = (props) => {
   const {match: {params: {id}}, offers} = props;
-
   const offer = offers.find((item) => item.id === +id);
 
   useEffect(() => {
@@ -29,7 +29,6 @@ const OfferDetails = (props) => {
     type,
     bedrooms,
   } = offer;
-
   return (
     <div className="page">
       <header className="header">
@@ -60,7 +59,7 @@ const OfferDetails = (props) => {
       <main className="page__main page__main--property">
         <section className="property">
           <div className="property__gallery-container container">
-            <div className="property__gallery">
+            <div className="property__gallery" style={{height: 404}}>
               {
                 images.map((photo, i) => <div key={`id-photo${i}`} className="property__image-wrapper">
                   <img className="property__image" src={photo} alt={title}/>
@@ -70,6 +69,11 @@ const OfferDetails = (props) => {
           </div>
           <div className="property__container container">
             <div className="property__wrapper">
+              { offer.is_premium ?
+                <div className="property__mark">
+                  <span>Premium</span>
+                </div> : ``
+              }
               <div className="property__name-wrapper">
                 <h1 className="property__name">
                   {title}
@@ -83,10 +87,10 @@ const OfferDetails = (props) => {
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
-                  <span style={{width: `${rating * 20}%`}}></span>
+                  <span style={{width: `${Math.round(rating) * 20}%`}}></span>
                   <span className="visually-hidden"></span>
                 </div>
-                <span className="property__rating-value rating__value">{rating}</span>
+                <span className="property__rating-value rating__value">{Math.round(rating)}</span>
               </div>
               <ul className="property__features">
                 <li className="property__feature property__feature--entire">
@@ -116,14 +120,13 @@ const OfferDetails = (props) => {
               <div className="property__host">
                 <h2 className="property__host-title">Meet the host</h2>
                 <div className="property__host-user user">
-                  <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
+                  <div className={`property__avatar-wrapper user__avatar-wrapper${ host.is_pro ? ` property__avatar-wrapper--pro` : ``}`}>
                     <img className="property__avatar user__avatar" src={`../${host.avatar_url}`} width="74" height="74" alt="Host avatar" />
                   </div>
                   <span className="property__user-name">
                     {host.name}
                   </span>
-                  <span className="property__user-status">
-                  </span>
+                  <span className="property__user-status"></span>
                 </div>
                 <div className="property__description">
                   <p className="property__text">
@@ -135,14 +138,11 @@ const OfferDetails = (props) => {
             </div>
           </div>
           <section className="property__map map">
-            <Map
-            />
+            <Map offers={offers} />
           </section>
         </section>
         <div className="container">
-          <section className="near-places places">
-            <h2 className="near-places__title">Other places in the neighbourhood</h2>
-          </section>
+          <PlacesNear offers={offers} id={id}/>
         </div>
       </main>
     </div>
