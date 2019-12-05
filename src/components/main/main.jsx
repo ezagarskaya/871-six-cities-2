@@ -79,7 +79,7 @@ const Main = (props) => {
 };
 
 const mapStateToProps = (state) => ({
- offers: state.currentOffers,
+  offers: state.currentOffers,
 //  offers: {0: {
 //   bedrooms: 4,
 //   city: {name: "ams"},
