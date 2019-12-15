@@ -1,12 +1,16 @@
 import React from 'react';
 import {Link} from "react-router-dom";
+import {connect} from 'react-redux';
+import {ActionCreator} from '../../reducer.js';
 
 const PlaceCard = (props) => {
   const {offer, id} = props;
   const {title, price, rating, type} = offer;
 
   return (
-    <article key={id} className="cities__place-card place-card" >
+    <article onMouseOver={() => props.dispatch(ActionCreator.getActive(offer.id))}
+      onMouseLeave={() => props.dispatch(ActionCreator.getActive(null))}
+      key={id} className="cities__place-card place-card" >
       { props.offer.is_premium ?
         <div className="place-card__mark">
           <span>Premium</span>
@@ -47,8 +51,11 @@ const PlaceCard = (props) => {
   );
 };
 
+const mapDispatchToProps = (dispatch) => ({
+  dispatch,
+});
+
 // PlaceCard.propTypes = {
 //   offer: PropTypes.object.isRequired,
 // };
-
-export default PlaceCard;
+export default connect(mapDispatchToProps)(PlaceCard);

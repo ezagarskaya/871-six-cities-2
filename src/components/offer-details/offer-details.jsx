@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {Link} from "react-router-dom";
 
 import Map from '../map/map.jsx';
+import {withReviewsList} from '../../hocs/with-reviews-list/with-reviews-list.jsx';
 import ReviewsList from '../reviews-list/reviews-list.jsx';
 import PlacesNear from '../places-near/places-near.jsx';
 import {ActionCreator} from '../../reducer.js';
@@ -134,11 +135,11 @@ const OfferDetails = (props) => {
                   </p>
                 </div>
               </div>
-              <ReviewsList id={id}/>
+              {withReviewsList(ReviewsList, id)}
             </div>
           </div>
           <section className="property__map map">
-            <Map offers={offers} />
+            <Map offers={offers} id={id} />
           </section>
         </section>
         <div className="container">

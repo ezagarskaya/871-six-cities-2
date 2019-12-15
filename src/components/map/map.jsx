@@ -24,7 +24,7 @@ class Map extends PureComponent {
     const zoom = 12;
 
     const icon = leaflet.icon({
-      iconUrl: `/img/pin.svg`,
+      iconUrl: ``,
       iconSize: [30, 30]
     });
 
@@ -43,9 +43,15 @@ class Map extends PureComponent {
     .addTo(this.map);
 
     offers.map((offer) => {
-      leaflet
-      .marker([offer.location.latitude, offer.location.longitude], {icon})
-      .addTo(this.map);
+      if (offer.id === +this.props.id) {
+        icon.options.iconUrl = `/img/pin-active.svg`;
+        leaflet
+        .marker([offer.location.latitude, offer.location.longitude], {icon}).addTo(this.map);
+      } else {
+        icon.options.iconUrl = `/img/pin.svg`;
+        leaflet
+        .marker([offer.location.latitude, offer.location.longitude], {icon}).addTo(this.map);
+      }
     });
   }
 
@@ -80,16 +86,22 @@ class Map extends PureComponent {
       .addTo(this.map);
 
     const icon = leaflet.icon({
-      iconUrl: `/img/pin.svg`,
+      iconUrl: ``,
       iconSize: [30, 30]
     });
 
     this.map.setView(city, zoom);
 
     offers.map((offer) => {
-      leaflet
-      .marker([offer.location.latitude, offer.location.longitude], {icon})
-      .addTo(this.map);
+      if (offer.id === +this.props.id) {
+        icon.options.iconUrl = `/img/pin-active.svg`;
+        leaflet
+        .marker([offer.location.latitude, offer.location.longitude], {icon}).addTo(this.map);
+      } else {
+        icon.options.iconUrl = `/img/pin.svg`;
+        leaflet
+        .marker([offer.location.latitude, offer.location.longitude], {icon}).addTo(this.map);
+      }
     });
   }
 
