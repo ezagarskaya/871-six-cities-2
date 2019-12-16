@@ -25,7 +25,7 @@ const logIn = (login, pass) => {
       password: pass
     }).then((response) => dispatch(ActionCreator.signIn(response.data)),
     // eslint-disable-next-line no-alert
-    (error) => alert(`Wrong password or email`, error))
+        (error) => alert(`Wrong password or email`, error))
   );
 };
 
@@ -103,7 +103,6 @@ const reducer = (state = initialState, action) => {
         cities: [...new Set(action.payload.map((city) => city.city.name))],
       });
     case ActionType.LOG_IN:
-    console.log(action.payload)
       return Object.assign({}, state, {
         user: action.payload,
         isAuthorizationRequired: true,
