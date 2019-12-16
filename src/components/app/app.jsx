@@ -19,15 +19,24 @@ class App extends PureComponent {
   }
 
   render() {
-    return (
-      <Router>
-        <Switch>
-          <Route path="/" exact component={Main} />
-          <Route path="/offer/:id" exact component={OfferDetails} />
-          <Route path="/sign-in" exact component={SignIn} />
-        </Switch>
-      </Router>
-    );
+    if (this.props.authorization) {
+      return (
+        <Router>
+          <Switch>
+            <Route path="/" exact component={SignIn} />
+          </Switch>
+        </Router>
+      );
+    } else {
+      return (
+        <Router>
+          <Switch>
+            <Route path="/" exact component={Main} />
+            <Route path="/offer/:id" exact component={OfferDetails} />
+          </Switch>
+        </Router>
+      );
+    }
   }
 }
 

@@ -8,6 +8,7 @@ const initialState = {
   isAuthorizationRequired: false,
   cardActive: null,
   isOpen: null,
+  user: null,
 };
 
 const getHotels = () => {
@@ -22,21 +23,11 @@ const logIn = (login, pass) => {
     api.post(`/login`, {
       email: login,
       password: pass
-    }).then((response) => dispatch(ActionCreator.logIn(response.data))
-    // error => dispatch(ActionCreator.wrongPass(response.data))
-    )
+    }).then((response) => dispatch(ActionCreator.signIn(response.data)),
+    // eslint-disable-next-line no-alert
+    (error) => alert(`Wrong password or email`, error))
   );
 };
-
-const getAuthorization = () => {
-  return ((dispatch, getState, api) =>
-    api.get(`/login`).then((response) => dispatch(ActionCreator.getToken(response.data))
-
-    // error => dispatch(ActionCreator.wrongPass(response.data))
-    )
-  );
-};
-
 
 const ActionType = {
   CHANGE_CITY: `CHANGE_CITY`,
@@ -60,17 +51,12 @@ const ActionCreator = {
     type: ActionType.ADD_HOTELS,
     payload: hotels,
   }),
-  signIn: () => ({
+  signIn: (user) => ({
     type: ActionType.LOG_IN,
-    payload: true,
+    payload: user,
   }),
-  getToken: () => ({
-    type: ActionType.LOG_IN,
-    payload: true,
-  }),
-  getHotels,
   logIn,
-  getAuthorization,
+  getHotels,
   filterOffers: (id) => ({
     type: ActionType.FILTER_OFFERS,
     payload: id,
@@ -117,8 +103,10 @@ const reducer = (state = initialState, action) => {
         cities: [...new Set(action.payload.map((city) => city.city.name))],
       });
     case ActionType.LOG_IN:
+    console.log(action.payload)
       return Object.assign({}, state, {
-        isAuthorizationRequired: action.payload,
+        user: action.payload,
+        isAuthorizationRequired: true,
       });
     case ActionType.FILTER_OFFERS: {
       const offer = state.hotels.find((hotel) => hotel.id === +action.payload);

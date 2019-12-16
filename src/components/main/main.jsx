@@ -28,7 +28,7 @@ const Main = (props) => {
                     <a className="header__nav-link header__nav-link--profile" href="#">
                       <div className="header__avatar-wrapper user__avatar-wrapper">
                       </div>
-                      <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+                      <span className="header__user-name user__name">{ props.isAuthorizationRequired ? props.user.email : `Sign in`}</span>
                     </a>
                   </li>
                 </ul>
@@ -68,6 +68,8 @@ const Main = (props) => {
 const mapStateToProps = (state) => ({
   offers: state.currentOffers,
   card: state.cardActive,
+  isAuthorizationRequired: state.isAuthorizationRequired,
+  user: state.user,
 });
 
 export default connect(mapStateToProps)(Main);

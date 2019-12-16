@@ -1,14 +1,22 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import {connect} from 'react-redux';
+import {ActionCreator} from '../../reducer.js';
 
-const SignIn = () => {
+const SignIn = (props) => {
+  const form = useRef(null);
+  const submit = (e) => {
+    e.preventDefault();
+    const email = form.current.elements[0].value;
+    const password = form.current.elements[1].value;
+    props.dispatch(ActionCreator.logIn(email, password));
+  };
 
   return (
     <main className="page__main page__main--login">
       <div className="page__login-container container">
         <section className="login">
           <h1 className="login__title">Sign in</h1>
-          <form className="login__form form" action="#" method="post" >
+          <form className="login__form form" ref={form} onSubmit={submit} >
             <div className="login__input-wrapper form__input-wrapper">
               <label className="visually-hidden">E-mail</label>
               <input
@@ -16,6 +24,7 @@ const SignIn = () => {
                 type="email"
                 name="email"
                 placeholder="Email"
+                required
               />
             </div>
             <div className="login__input-wrapper form__input-wrapper">
@@ -25,6 +34,7 @@ const SignIn = () => {
                 type="password"
                 name="password"
                 placeholder="Password"
+                required
               />
             </div>
             <button className="login__submit form__submit button" type="submit">Sign in</button>
