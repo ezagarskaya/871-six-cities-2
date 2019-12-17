@@ -13,7 +13,10 @@ export function withReviewsList(Component, data) {
     }
 
     componentDidMount() {
-      api.get(`/comments/${this.props.id}`).then((response) => this.setState({reviews: response.data}));
+      api.get(`/comments/${this.props.id}`).then((response) => {
+        this.setState({reviews: response.data})
+        console.log(response.data)
+      });
     }
 
     render() {

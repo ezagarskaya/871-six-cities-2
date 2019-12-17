@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 import Map from '../map/map.jsx';
 import {withReviewsList} from '../../hocs/with-reviews-list/with-reviews-list.jsx';
 import ReviewsList from '../reviews-list/reviews-list.jsx';
+import Comment from '../comment/comment.jsx';
 import PlacesNear from '../places-near/places-near.jsx';
 import {ActionCreator} from '../../reducer.js';
 
